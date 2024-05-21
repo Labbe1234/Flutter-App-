@@ -65,14 +65,16 @@ class _VideoCardState extends State<VideoCard> {
                     width: 250,
                     child: const Text(
                       "Titulo del Videooooooooooooooooooooooooooooooooooo",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ),
                   Container(
                     width: 250,
                     child: const Text(
                       "Labbestia - 10000 Visitas",
-                      style: TextStyle(fontSize: 30, fontWeight: FontWeight.normal),
+                      style: TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.normal),
                     ),
                   ),
                 ],

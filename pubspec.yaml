@@ -11,7 +11,12 @@ dependencies:
   flutter:
     sdk: flutter
   video_player: ^2.2.19
+  camera: ^0.10.0+1
+  camera_web: ^0.3.3
   cupertino_icons: ^1.0.6
+  tflite: ^1.1.2
+  path_provider: ^2.0.5
+  tflite_flutter: ^0.10.1
 
 dev_dependencies:
   flutter_test:
