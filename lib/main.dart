@@ -3,6 +3,7 @@ import 'package:testapp/Widgets/home_page.dart';
 import 'package:testapp/Widgets/camera_page.dart';
 import 'package:testapp/Widgets/info_page.dart';
 import 'package:testapp/Widgets/settings_page.dart';
+import 'package:testapp/Widgets/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +22,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => SplashScreen(),
+        '/home': (context) => MyHomePage(),
+      },
     );
   }
 }
@@ -37,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   static final List<Widget> _pages = <Widget>[
     HomePage(),
-    CameraPage(),
+    ImagePickerDemo(),
     InfoPage(),
     SettingsPage(),
   ];
@@ -52,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("App Title"),
+        title: const Text("EcoSnap"),
         backgroundColor: Colors.green,
         actions: [
           IconButton(
