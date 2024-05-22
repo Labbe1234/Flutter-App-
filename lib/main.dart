@@ -1,102 +1,91 @@
 import 'package:flutter/material.dart';
-import 'package:camera/camera.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:io';
-import 'tflite_model_loader.dart';
+import 'package:testapp/Widgets/home_page.dart';
+import 'package:testapp/Widgets/camera_page.dart';
+import 'package:testapp/Widgets/info_page.dart';
+import 'package:testapp/Widgets/settings_page.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final cameras = await availableCameras();
-  final camera = cameras.first;
-  runApp(MyApp(camera: camera));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final CameraDescription camera;
-
-  const MyApp({Key? key, required this.camera}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: CameraScreen(camera: camera),
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const MyHomePage(),
     );
   }
 }
 
-class CameraScreen extends StatefulWidget {
-  final CameraDescription camera;
-
-  const CameraScreen({Key? key, required this.camera}) : super(key: key);
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
 
   @override
-  _CameraScreenState createState() => _CameraScreenState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _CameraScreenState extends State<CameraScreen> {
-  late CameraController _controller;
-  bool _isReady = false;
+class _MyHomePageState extends State<MyHomePage> {
+  int _selectedIndex = 0;
+  static final List<Widget> _pages = <Widget>[
+    HomePage(),
+    CameraPage(),
+    InfoPage(),
+    SettingsPage(),
+  ];
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = CameraController(widget.camera, ResolutionPreset.medium);
-    _controller.initialize().then((_) {
-      if (!mounted) {
-        return;
-      }
-      setState(() {
-        _isReady = true;
-      });
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
     });
-    TFLiteModelLoader.loadModel();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (!_isReady) {
-      return Container();
-    }
     return Scaffold(
-      appBar: AppBar(title: Text('Camera Screen')),
-      body: CameraPreview(_controller),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _classifyImage,
-        child: Icon(Icons.camera),
+      appBar: AppBar(
+        title: const Text("App Title"),
+        backgroundColor: Colors.green,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SettingsPage()),
+              );
+            },
+          ),
+        ],
+      ),
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.camera_alt),
+            label: 'Camera',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.info),
+            label: 'Info',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
       ),
     );
-  }
-
-  void _classifyImage() async {
-    try {
-      XFile? image = await _controller.takePicture();
-      if (image == null) return;
-
-      List<dynamic> output = await TFLiteModelLoader.runInference(image.path);
-      // Display classification result
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Image Classification Result'),
-            content: Text(output.toString()),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text('Close'),
-              ),
-            ],
-          );
-        },
-      );
-    } catch (e) {
-      print('Error classifying image: $e');
-    }
   }
 }
