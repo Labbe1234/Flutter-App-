@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             // Contenedor de Google Maps en la parte inferior
-            // GoogleMapsWidget(), // Usando el widget de Google Maps desde el archivo separado
+            GoogleMapsWidget(), // Usando el widget de Google Maps desde el archivo separado
           ],
         ),
       ),

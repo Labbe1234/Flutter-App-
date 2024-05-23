@@ -57,7 +57,17 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("EcoSnap"),
+        title: Row(
+          children: [
+            const Text("EcoSnap"),
+            const SizedBox(width: 8), // Espacio entre el logo y el título
+            Image.asset(
+              'assets/images/basuraman_limpio.png', // Ruta de la imagen del logo
+              height: 50, // Tamaño del logo
+              width: 50,
+            )
+          ],
+        ),
         backgroundColor: Colors.green,
         actions: [
           IconButton(
@@ -94,3 +104,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+

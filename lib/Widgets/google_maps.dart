@@ -31,3 +31,26 @@
 //     );
 //   }
 // }
+import 'package:flutter/material.dart';
+
+class GoogleMapsWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 300, // Altura fija para el contenedor de Google Maps
+      margin: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: Colors.green),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      padding: const EdgeInsets.all(16.0),
+      child: Center(
+        child: Text(
+          'Mapa aquí próximamente',
+          style: TextStyle(fontSize: 18),
+        ),
+      ),
+    );
+  }
+}
