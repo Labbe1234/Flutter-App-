@@ -1,55 +1,43 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_map/flutter_map.dart';
-// import 'package:latlong2/latlong.dart';
-
-// class GoogleMapsWidget extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return FlutterMap(
-//       options: MapOptions(
-//         center: LatLng(37.7749, -122.4194), // Coordenadas iniciales (San Francisco, CA)
-//         zoom: 12.0, // Zoom inicial
-//       ),
-//       layers: [
-//         TileLayerOptions(
-//           urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-//           subdomains: ['a', 'b', 'c'],
-//         ),
-//         MarkerLayerOptions(
-//           markers: [
-//             Marker(
-//               width: 80.0,
-//               height: 80.0,
-//               point: LatLng(37.7749, -122.4194), // Coordenadas del marcador
-//               builder: (ctx) => Container(
-//                 child: FlutterLogo(),
-//               ),
-//             ),
-//           ],
-//         ),
-//       ],
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
-class GoogleMapsWidget extends StatelessWidget {
+class GoogleMapEmbed extends StatelessWidget {
+  final String apiKey;
+
+  const GoogleMapEmbed({super.key, required this.apiKey});
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 300, // Altura fija para el contenedor de Google Maps
-      margin: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.green),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      padding: const EdgeInsets.all(16.0),
-      child: Center(
-        child: Text(
-          'Mapa aquí próximamente',
-          style: TextStyle(fontSize: 18),
-        ),
+    String html = '''
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <style>
+          html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+          }
+        </style>
+      </head>
+      <body>
+        <iframe
+          width="100%"
+          height="100%"
+          frameborder="0" style="border:0"
+          src="https://www.google.com/maps/embed/v1/place?key=$apiKey
+          &q=Space+Needle,Seattle+WA" allowfullscreen>
+        </iframe>
+      </body>
+      </html>
+    ''';
+
+    return Scaffold(
+      body: WebView(
+        initialUrl: Uri.dataFromString(html, mimeType: 'text/html').toString(),
+        javascriptMode: JavascriptMode.unrestricted,
       ),
     );
   }

@@ -71,30 +71,40 @@ class _HomePageState extends State<HomePage> {
                     child: articles.isEmpty
                         ? Center(child: CircularProgressIndicator())
                         : ListView.builder(
-                      itemCount: articles.length,
-                      itemBuilder: (context, index) {
-                        String title = articles[index]['title'];
-                        String description = articles[index]['description'] ?? '';
-                        String url = articles[index]['url'];
-                        return ListTile(
-                          title: Text(title),
-                          subtitle: Text(
-                            description.length > 100
-                                ? '${description.substring(0, 100)}...'
-                                : description,
+                            itemCount: articles.length,
+                            itemBuilder: (context, index) {
+                              String title = articles[index]['title'];
+                              String description = articles[index]['description'] ?? '';
+                              String url = articles[index]['url'];
+                              return ListTile(
+                                title: Text(title),
+                                subtitle: Text(
+                                  description.length > 100
+                                      ? '${description.substring(0, 100)}...'
+                                      : description,
+                                ),
+                                onTap: () {
+                                  _launchURL(url);
+                                },
+                              );
+                            },
                           ),
-                          onTap: () {
-                            _launchURL(url);
-                          },
-                        );
-                      },
-                    ),
                   ),
                 ],
               ),
             ),
+
             // Contenedor de Google Maps en la parte inferior
-            GoogleMapsWidget(), // Usando el widget de Google Maps desde el archivo separado
+            Container(
+              height: 300, // Altura fija para el contenedor de Google Maps
+              margin: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: Colors.green),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: GoogleMapEmbed(apiKey: "AIzaSyCVQSdkq2E7r1QiOcAEmAVZncFIvVWQ0mM"), // Replace "YOUR_API_KEY_HERE" with your actual API key
+            ),
           ],
         ),
       ),
