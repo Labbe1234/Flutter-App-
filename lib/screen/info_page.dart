@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/Widgets/info_message.dart';
 
 class InfoPage extends StatelessWidget {
   const InfoPage({Key? key}) : super(key: key);
@@ -36,7 +37,7 @@ class InfoPage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Center(
           child: Container(
-            width: MediaQuery.of(context).size.width * 0.8, // Reducimos el ancho del contenedor
+            width: MediaQuery.of(context).size.width * 0.8,
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -61,44 +62,50 @@ class InfoPage extends StatelessWidget {
                 SizedBox(height: 20),
                 GridView.count(
                   shrinkWrap: true,
-                  crossAxisCount: 2, // Mostrar en dos columnas
-                  crossAxisSpacing: 10.0, // Espacio entre columnas
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10.0,
                   mainAxisSpacing: 10.0,
                   children: [
                     IconButton(
                       icon: Icon(Icons.shopping_cart, size: 50.0),
                       onPressed: () {
-                        _showInfoDialog(context, 'Cartón', 'Información sobre el cartón.');
+                        _showInfoDialog(context, InfoMessages.cartonTitle, InfoMessages.cartonMessage);
                       },
                     ),
                     IconButton(
                       icon: Icon(Icons.local_activity, size: 50.0),
                       onPressed: () {
-                        _showInfoDialog(context, 'Vidrio', 'Información sobre el vidrio.');
+                        _showInfoDialog(context, InfoMessages.vidrioTitle, InfoMessages.vidrioMessage);
                       },
                     ),
                     IconButton(
                       icon: Icon(Icons.local_florist, size: 50.0),
                       onPressed: () {
-                        _showInfoDialog(context, 'Plástico', 'Información sobre el plástico.');
+                        _showInfoDialog(context, InfoMessages.plasticoTitle, InfoMessages.plasticoMessage);
                       },
                     ),
                     IconButton(
                       icon: Icon(Icons.local_drink, size: 50.0),
                       onPressed: () {
-                        _showInfoDialog(context, 'Lata', 'Información sobre las latas.');
+                        _showInfoDialog(context, InfoMessages.lataTitle, InfoMessages.lataMessage);
                       },
                     ),
                     IconButton(
                       icon: Icon(Icons.category, size: 50.0),
                       onPressed: () {
-                        _showInfoDialog(context, 'Metal', 'Información sobre el metal.');
+                        _showInfoDialog(context, InfoMessages.metalTitle, InfoMessages.metalMessage);
                       },
                     ),
+                    // IconButton(
+                    //   icon: Icon(Icons.delete, size: 50.0),
+                    //   onPressed: () {
+                    //     _showInfoDialog(context, InfoMessages.basuraTitle, InfoMessages.basuraMessage);
+                    //   },
+                    // ),
                     IconButton(
-                      icon: Icon(Icons.delete, size: 50.0),
+                      icon: Icon(Icons.description, size: 50.0),
                       onPressed: () {
-                        _showInfoDialog(context, 'Basura', 'Información sobre la basura.');
+                        _showInfoDialog(context, InfoMessages.papelTitle, InfoMessages.papelDescription);
                       },
                     ),
                   ],

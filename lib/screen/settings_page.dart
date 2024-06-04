@@ -1,33 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/screen/home_page.dart';
+import 'package:testapp/screen/profile_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatelessWidget {
-  final String supportPhoneNumber = '+56993948960'; // Número de soporte telefónico
+  final String supportPhoneNumber = '+56993948960';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Configuraciones'),
+        title: Text('Settings'),
       ),
       body: ListView(
         children: [
           ExpansionTile(
-            title: Text('Perfil'),
+            title: Text('Profile'),
             children: [
               ListTile(
-                title: Text('Editar Perfil'),
+                title: Text('View Profile'),
                 onTap: () {
-                  Navigator.pushNamed(context, '/edit_profile');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfilePage(
+                      username: 'John Doe', // Replace with actual data
+                      email: 'john.doe@example.com', // Replace with actual data
+                      age: 30, // Replace with actual data
+                      imageUrl: 'https://example.com/profile.jpg', // Replace with actual data
+                    )),
+                  );  
+                },
+              ),
+              ListTile(
+                title: Text('Edit Profile'),
+                onTap: () async {
+                  final result = await Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => EditProfilePage()),
+                  );
+                  if (result != null) {
+                    // Handle the edited profile data
+                    print(result);
+                  }
                 },
               ),
             ],
           ),
           ExpansionTile(
-            title: Text('Teléfono'),
+            title: Text('Phone'),
             children: [
               ListTile(
-                title: Text('Número de Soporte: $supportPhoneNumber'),
+                title: Text('Support Number: $supportPhoneNumber'),
                 onTap: () {
                   _launchPhoneApp(supportPhoneNumber);
                 },
@@ -35,10 +58,10 @@ class SettingsPage extends StatelessWidget {
             ],
           ),
           ExpansionTile(
-            title: Text('Alerta'),
+            title: Text('Alert'),
             children: [
               ListTile(
-                title: Text('Problemas'),
+                title: Text('Report Problems'),
                 onTap: () {
                   _showReportDialog(context);
                 },
@@ -50,7 +73,7 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  // Función para lanzar la aplicación de marcación del teléfono
+  // Function to launch phone app
   _launchPhoneApp(String phoneNumber) async {
     String url = 'tel:$phoneNumber';
     if (await canLaunch(url)) {
@@ -60,7 +83,7 @@ class SettingsPage extends StatelessWidget {
     }
   }
 
-  // Función para mostrar el diálogo de informe de problemas
+  // Function to show report dialog
   void _showReportDialog(BuildContext context) {
     final _problemTypeController = TextEditingController();
     final _problemDescriptionController = TextEditingController();
@@ -69,18 +92,18 @@ class SettingsPage extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Reportar un problema'),
+          title: Text('Report a Problem'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextFormField(
                 controller: _problemTypeController,
-                decoration: InputDecoration(labelText: 'Tipo de problema'),
+                decoration: InputDecoration(labelText: 'Problem Type'),
               ),
               SizedBox(height: 20),
               TextFormField(
                 controller: _problemDescriptionController,
-                decoration: InputDecoration(labelText: 'Descripción del problema'),
+                decoration: InputDecoration(labelText: 'Problem Description'),
                 maxLines: null,
               ),
             ],
@@ -90,14 +113,14 @@ class SettingsPage extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cancelar'),
+              child: Text('Cancel'),
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
                 _showThankYouDialog(context);
               },
-              child: Text('Enviar'),
+              child: Text('Send'),
             ),
           ],
         );
@@ -105,20 +128,20 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  // Función para mostrar el diálogo de agradecimiento
+  // Function to show thank you dialog
   void _showThankYouDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Gracias'),
-          content: Text('Gracias por cooperar con nosotros EcoSnap'),
+          title: Text('Thank You'),
+          content: Text('Thank you for cooperating with us.'),
           actions: [
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cerrar'),
+              child: Text('Close'),
             ),
           ],
         );
