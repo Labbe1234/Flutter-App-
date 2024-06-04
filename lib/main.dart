@@ -1,12 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:testapp/Widgets/home_page.dart';
 import 'package:testapp/Widgets/camera_page.dart';
 import 'package:testapp/Widgets/info_page.dart';
 import 'package:testapp/Widgets/settings_page.dart';
+import 'package:testapp/Widgets/sign_in.dart';
 import 'package:testapp/Widgets/splash_screen.dart';
+import 'package:testapp/firebase_options.dart';
+import 'package:testapp/screen/initial_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,);
   runApp(const MyApp());
 }
 
@@ -25,6 +31,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => SplashScreen(),
+        '/Welcome': (context) => WelcomeScreen(),
+        '/signIn': (context) => SignInPage(),
+        // '/signUp': (context) => SignUp(),
         '/home': (context) => MyHomePage(),
       },
     );
