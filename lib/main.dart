@@ -5,6 +5,7 @@ import 'package:testapp/Widgets/camera_page.dart';
 import 'package:testapp/Widgets/info_page.dart';
 import 'package:testapp/Widgets/settings_page.dart';
 import 'package:testapp/Widgets/sign_in.dart';
+import 'package:testapp/Widgets/sign_up.dart';
 import 'package:testapp/Widgets/splash_screen.dart';
 import 'package:testapp/firebase_options.dart';
 import 'package:testapp/screen/initial_page.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => SplashScreen(),
         '/Welcome': (context) => WelcomeScreen(),
         '/signIn': (context) => SignInPage(),
-        // '/signUp': (context) => SignUp(),
+        '/signUp': (context) => SignUpPage(),
         '/home': (context) => MyHomePage(),
       },
     );
