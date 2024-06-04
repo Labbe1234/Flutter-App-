@@ -21,6 +21,8 @@ dependencies:
   image_picker: ^1.0.4
   http: ^0.13.4
   flutter_map: ^0.13.0
+  firebase_core: ^2.32.0
+  firebase_auth: ^4.20.0
 
 dev_dependencies:
   flutter_test:
