@@ -16,6 +16,7 @@ class AuthService {
          return null;
       }
     }
+    return null;
   }
 
   Future<UserCredential?> signUpWithEmailAndPassword(String email, String password) async {
@@ -31,6 +32,7 @@ class AuthService {
          return null;
       }
     }
+    return null;
   }
 
   // Add sign-out functionality if needed

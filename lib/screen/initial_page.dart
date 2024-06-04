@@ -9,9 +9,9 @@ class WelcomeScreen extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Image.asset(
-            'assets/images/background.jpg', // Ruta de la imagen de fondo
+            'assets/images/fondo_usuarios.jpg', // Ruta de la imagen de fondo
             fit: BoxFit.cover,
-          ),
+          ),  
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
