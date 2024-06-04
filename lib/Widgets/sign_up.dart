@@ -84,8 +84,16 @@ bool _validateUserInput() {
     Widget build(BuildContext context) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Sign Up'),
+      backgroundColor: const Color.fromARGB(201, 1, 68, 11), // Dark blue background
+      title: const Text(
+        'Sign Up', // Change to 'Sign Up' for consistency
+        style: TextStyle(
+          color: Colors.white, // White text color
+          fontSize: 24.0,
+          fontWeight: FontWeight.bold,
         ),
+      ),
+    ),
         body: SingleChildScrollView( // Allow scrolling if content overflows
         child: Padding(
           padding: const EdgeInsets.all(20.0),

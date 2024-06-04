@@ -24,6 +24,8 @@ dependencies:
   image: ^3.0.1
   firebase_core: ^2.32.0
   firebase_auth: ^4.20.0
+  youtube_player_flutter: ^8.0.0
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:

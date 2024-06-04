@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
-import 'google_maps.dart'; // Importa el archivo de Google Maps
+import '../Widgets/google_maps.dart'; // Importa el archivo de Google Maps
 
 class HomePage extends StatefulWidget {
   @override
