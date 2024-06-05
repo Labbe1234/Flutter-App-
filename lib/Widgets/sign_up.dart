@@ -16,7 +16,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _confirmPasswordController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
   final _authService = AuthService(); // Create an AuthService instance
-  bool _showPassword = false;
+  // bool _showPassword = false;
 
   String _errorMessage = '';
 

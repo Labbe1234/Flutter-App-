@@ -28,6 +28,10 @@ dependencies:
   shared_preferences: ^2.2.3
   webview_flutter: ^3.0.4
   flutter_inappwebview: ^5.3.2
+  cloud_firestore: ^4.17.5
+  geolocator: ^9.0.0
+  permission_handler: ^10.2.0
+  
 
 dev_dependencies:
   flutter_test:

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:testapp/screen/home_page.dart';
+import 'package:testapp/screen/home_page.dart' as home;
 import 'package:testapp/screen/profile_page.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:testapp/screen/edit_profile.dart';
 
 class SettingsPage extends StatelessWidget {
   final String supportPhoneNumber = '+56993948960';
@@ -19,16 +20,11 @@ class SettingsPage extends StatelessWidget {
             children: [
               ListTile(
                 title: Text('View Profile'),
-                onTap: () {
+                onTap: (){
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ProfilePage(
-                      username: 'John Doe', // Replace with actual data
-                      email: 'john.doe@example.com', // Replace with actual data
-                      age: 30, // Replace with actual data
-                      imageUrl: 'https://example.com/profile.jpg', // Replace with actual data
-                    )),
-                  );  
+                    MaterialPageRoute(builder: (context) => ProfilePage() )
+                  );
                 },
               ),
               ListTile(
